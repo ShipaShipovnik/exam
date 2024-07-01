@@ -1,8 +1,7 @@
 from django.contrib.auth.models import Group
 
-def user_in_admin_group(request):
+def is_admin_context(request):
+    is_admin = False
     if request.user.is_authenticated:
-        is_admin = Group.objects.get(name='admins').user_set.filter(id=request.user.id).exists()
-    else:
-        is_admin = False
+        is_admin = Group.objects.filter(name='admins').exists() and request.user.groups.filter(name='admins').exists()
     return {'is_admin': is_admin}

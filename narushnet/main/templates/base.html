@@ -1,8 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <title>Нарушений.нет | {% block title%}{% endblock %}</title>
@@ -21,7 +19,7 @@
                 <!-- Если авторизован -->
                 <li class="nav-item"><a href="{% url 'home' %}" class="nav-link" aria-current="page">Главная</a></li>
                 {% if is_admin %}
-                <li class="nav-item"><a href="{% url 'application_list' %}">АДМИН ПАНЕЛЬ</a></li>
+                <li class="nav-item"><a href="{% url 'application_list' %}" class="nav-link">АДМИН ПАНЕЛЬ</a></li>
                 {% endif %}
                 <li class="nav-item"><a href="{% url 'user_profile' %}" class="nav-link">Личный кабинет</a></li>
                 <li class="nav-item"><a href="{% url 'add' %}" class="nav-link">Отправить заявление</a></li>
