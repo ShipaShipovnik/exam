@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Личный кабинет{% endblock %}
+
+{% block content%}
+<h2>Информация о пользователе</h2>
+<div class="user-info-block">
+    <p>Имя: {{ user.first_name }}</p>
+    <p>Фамилия: {{ user.last_name }}</p>
+    <p>Отчество: {{ user.third_name }}</p>
+    <p>Телефон: {{ user.phone }}</p>
+    <p>Email: {{ user.email }}</p>
+</div>
+
+<div class="applications">
+    <h2>Ваши заявления</h2>
+    <table class="table">
+        <tr>
+            <th>id заявления</th>
+            <th>Номер машины</th>
+            <th>Текст заявления</th>
+            <th>статус</th>
+        </tr>
+        {% for application in applications%}
+        <tr>
+            <td>{{ application.id }}</td>
+            <td>{{ application.car }}</td>
+            <td>{{ application.descr}}</td>
+            <td>{{ application.get_status_display }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td rowspan="4">У вас нет заявок )</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

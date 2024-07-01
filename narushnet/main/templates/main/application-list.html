@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}админка{% endblock %}
+
+{% block content%}
+ <h1>Список заявок</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Пользователь</th>
+                <th>Автомобиль</th>
+                <th>Описание</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in applications %}
+            <tr>
+                <td>{{ application.user }}</td>
+                <td>{{ application.car }}</td>
+                <td>{{ application.descr }}</td>
+                <td>{{ application.get_status_display }}</td>
+                <td>
+                    <form action="{% url 'approve_application' application.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Принять</button>
+                    </form>
+                    <form action="{% url 'reject_application' application.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Отклонить</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
